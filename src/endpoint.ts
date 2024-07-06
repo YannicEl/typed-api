@@ -1,7 +1,7 @@
 import type { Schema } from "zod";
 
 export type DefineEndpointParams<RequestBody, ResponeBody> = {
-	path: string;
+	path: string | URL;
 	requestSchema: Schema<RequestBody>;
 	responseSchema: Schema<ResponeBody>;
 };

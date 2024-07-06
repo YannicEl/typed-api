@@ -1,25 +1,36 @@
-import type { Schema, z } from "zod";
+import type { z } from "zod";
+import { defineEndpoint } from "./endpoint";
 import type { ApiEndpoint, DefineEndpointParams } from "./endpoint";
 
-export type ApiClientParams<T> = {
-	// basePath: string;
-	// [Key in keyof T]: {
-	// 	requestSchema: Schema<TRequest>;
-	// 	responseSchema: Schema<TResponse>;
-	// };
-	// [Key in keyof T]: DefineEndpointParams<TRequest, TResponse>;
-	[Key in keyof T]: T[Key];
+type Endpoints = Record<string, DefineEndpointParams<unknown, unknown>>;
+
+type DefineApiClientParams<T extends Endpoints> = {
+	baseUrl: string | URL;
+	endpoints: {
+		[Key in keyof T]: T[Key];
+	};
 };
 
-export type ApiClient<T> = {
-	[Key in keyof T]: T[Key] extends DefineEndpointParams<
-		infer TRequest,
-		infer TResponse
-	>
-		? ApiEndpoint<TRequest, TResponse>
-		: never;
+type ApiClient<T extends Endpoints> = {
+	[Key in keyof T]: ApiEndpoint<
+		z.infer<T[Key]["requestSchema"]>,
+		z.infer<T[Key]["responseSchema"]>
+	>;
 };
 
-export function defineApiClient<T>(routes: ApiClientParams<T>): ApiClient<T> {
-	return {} as ApiClient<T>;
+export function defineApiClient<T extends Endpoints>({
+	baseUrl,
+	endpoints,
+}: DefineApiClientParams<T>): ApiClient<T> {
+	if (typeof baseUrl === "string") baseUrl = new URL(baseUrl);
+
+	const client = {} as ApiClient<T>;
+	for (const path in endpoints) {
+		const endpointParams = endpoints[path];
+		endpointParams.path = new URL(endpointParams.path, baseUrl);
+		const endpoint = defineEndpoint(endpointParams);
+		client[path] = endpoint;
+	}
+
+	return client;
 }
