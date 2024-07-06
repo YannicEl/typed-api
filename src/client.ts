@@ -1,6 +1,6 @@
 import type { z } from "zod";
-import { defineEndpoint } from "./endpoint";
-import type { ApiEndpoint, DefineEndpointParams } from "./endpoint";
+import type { ApiEndpoint, DefineEndpointParams } from "./endpoint.js";
+import { defineEndpoint } from "./endpoint.js";
 
 type Endpoints = Record<string, DefineEndpointParams<unknown, unknown>>;
 
