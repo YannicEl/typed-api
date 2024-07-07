@@ -2,16 +2,16 @@ import type { z } from "zod";
 import type { ApiEndpoint, DefineEndpointParams } from "./endpoint.js";
 import { defineEndpoint } from "./endpoint.js";
 
-type Endpoints = Record<string, DefineEndpointParams<unknown, unknown>>;
+export type Endpoints = Record<string, DefineEndpointParams<unknown, unknown>>;
 
-type DefineApiClientParams<T extends Endpoints> = {
+export type DefineApiClientParams<T extends Endpoints> = {
 	baseUrl: string | URL;
 	endpoints: {
 		[Key in keyof T]: T[Key];
 	};
 };
 
-type ApiClient<T extends Endpoints> = {
+export type ApiClient<T extends Endpoints> = {
 	[Key in keyof T]: ApiEndpoint<
 		z.infer<T[Key]["requestSchema"]>,
 		z.infer<T[Key]["responseSchema"]>
