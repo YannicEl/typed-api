@@ -12,10 +12,10 @@ importers:
         specifier: 1.8.3
         version: 1.8.3
       typescript:
-        specifier: 5.5.3
-        version: 5.5.3
+        specifier: 4.9.5
+        version: 4.9.5
       zod:
-        specifier: ^3.23.8
+        specifier: 3.23.8
         version: 3.23.8
 
 packages:
@@ -73,9 +73,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  typescript@5.5.3:
-    resolution: {integrity: sha512-/hreyEujaB0w76zKo6717l3L0o/qEUtRgdvUBvlkhoWeOVMjMuHNHk0BRBzikzuGDqNmPQbg5ifMEqsHLiIUcQ==}
-    engines: {node: '>=14.17'}
+  typescript@4.9.5:
+    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
+    engines: {node: '>=4.2.0'}
     hasBin: true
 
   zod@3.23.8:
@@ -118,6 +118,6 @@ snapshots:
   '@biomejs/cli-win32-x64@1.8.3':
     optional: true
 
-  typescript@5.5.3: {}
+  typescript@4.9.5: {}
 
   zod@3.23.8: {}
