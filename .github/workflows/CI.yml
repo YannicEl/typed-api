@@ -48,17 +48,8 @@ jobs:
         run: pnpm test
 
       - name: Publish canary release
+        if: github.event_name == 'push'
         run: pnpm run release:canary
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
           NPM_CONFIG_PROVENANCE: true
-
-
-  release:
-    if: github.event_name == 'push'
-    name: Release lib
-    needs:
-      - test
-    uses: ./.github/workflows/release_lib.yml
-    secrets:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
