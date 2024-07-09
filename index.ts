@@ -1,5 +1,5 @@
-import { defineApiClient } from "./src/client";
 import { z } from "zod";
+import { defineApiClient } from "./src/client";
 import { defineEndpoint } from "./src/endpoint";
 
 const client = defineApiClient({

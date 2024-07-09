@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    branches:
+      - 'main'
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # to create releae with provenance
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build lib
+        run: pnpm build
+
+      - name: Format Check
+        run: pnpm run format:check
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Publish canary release
+        run: pnpm run release:canary
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NPM_CONFIG_PROVENANCE: true
+
+
+  release:
+    if: github.event_name == 'push'
+    name: Release lib
+    needs:
+      - test
+    uses: ./.github/workflows/release_lib.yml
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
