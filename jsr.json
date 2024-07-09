@@ -1,5 +1,5 @@
 {
 	"name": "@yannicel/typed-api",
-	"version": "0.0.2",
+	"version": "0.0.6",
 	"exports": "./src/index.ts"
 }
