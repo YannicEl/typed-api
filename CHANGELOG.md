@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v0.1.3
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.1.2...v0.1.3)
+
+### 🩹 Fixes
+
+- Type stuff ([7ecc3c2](https://github.com/YannicEl/typed-api/commit/7ecc3c2))
+- Type stuff ([d9a9a79](https://github.com/YannicEl/typed-api/commit/d9a9a79))
+
+### 🏡 Chore
+
+- Trun on isolatedDeclarations ([8eaea4d](https://github.com/YannicEl/typed-api/commit/8eaea4d))
+
+### ✅ Tests
+
+- Added a test ([457afc3](https://github.com/YannicEl/typed-api/commit/457afc3))
+
+### ❤️ Contributors
+
+- YannicEl ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.1.2
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.1.1...v0.1.2)
