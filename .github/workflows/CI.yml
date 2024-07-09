@@ -60,7 +60,3 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
           NPM_CONFIG_PROVENANCE: true
-
-      - name: Publish jsr release
-        if: startsWith(github.event.head_commit.message, 'chore(release)') == true
-        run: pnpm release:jsr

@@ -18,8 +18,7 @@
 	"scripts": {
 		"watch": "tsc --watch",
 		"build": "tsc",
-		"release": "pnpm bump:jsr && changelogen --release",
-		"bump:jsr": "node ./bump-jsr.js",
+		"release": "changelogen --release --push",
 		"release:jsr": "pnpm dlx jsr publish --allow-dirty",
 		"release:canary": "changelogen --canary && pnpm publish --no-git-checks --access public --tag canary",
 		"format": "biome check --write .",
