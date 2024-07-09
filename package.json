@@ -23,13 +23,14 @@
 		"release:canary": "changelogen --canary && pnpm publish --no-git-checks --access public --tag canary",
 		"format": "biome check --write .",
 		"format:check": "biome check .",
-		"test": ""
+		"test": "vitest run"
 	},
 	"keywords": [],
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",
 		"changelogen": "0.5.5",
 		"typescript": "5.5.3",
+		"vitest": "2.0.1",
 		"zod": "3.23.8"
 	},
 	"peerDependencies": {
