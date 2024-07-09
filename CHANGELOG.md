@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.1
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.1.0...v0.1.1)
+
+### 🎨 Styles
+
+- Formatting ([aa66e89](https://github.com/YannicEl/typed-api/commit/aa66e89))
+
+### ❤️ Contributors
+
+- YannicEl ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.1.0
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.0.9...v0.1.0)

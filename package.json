@@ -1,7 +1,7 @@
 {
 	"name": "@yannicel/typed-api",
 	"description": "Utility library for turning any REST api into a typesafe client",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"author": "Yannic Ellhotka <https://github.com/YannicEl>",
 	"license": "MIT",
 	"homepage": "https://github.com/YannicEl/typed-api/",
@@ -10,7 +10,9 @@
 		"url": "https://github.com/YannicEl/typed-api"
 	},
 	"type": "module",
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"main": "./dist/index.js",
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.ts",
