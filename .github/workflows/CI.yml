@@ -41,14 +41,21 @@ jobs:
       - name: Build lib
         run: pnpm build
 
-      - name: Format Check
+      - name: Format check
         run: pnpm run format:check
 
       - name: Run tests
         run: pnpm test
 
       - name: Publish canary release
-        if: github.event_name == 'push'
+        if: startsWith(github.event.head_commit.message, 'chore(release)') == false
+        run: pnpm run release:canary
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NPM_CONFIG_PROVENANCE: true
+
+      - name: Publish release
+        if: startsWith(github.event.head_commit.message, 'chore(release)') == true
         run: pnpm run release:canary
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
