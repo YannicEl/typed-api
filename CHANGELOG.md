@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.4
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.0.3...v0.0.4)
+
+### 🏡 Chore
+
+- Fix CI workflow ([db9f92d](https://github.com/YannicEl/typed-api/commit/db9f92d))
+
+### ❤️ Contributors
+
+- YannicEl ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.0.3
 
 
