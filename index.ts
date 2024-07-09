@@ -5,27 +5,30 @@ import { defineEndpoint } from "./src/endpoint";
 const client = defineApiClient({
 	baseUrl: "https://example.com",
 	endpoints: {
-		hallo: {
+		post: {
 			path: "/hallo",
+			requestInit: {
+				method: "POST",
+			},
 			requestSchema: z.object({ hallo: z.string() }),
-			responseSchema: z.number(),
 		},
-		zwallo: {
+		get: {
 			path: "/zwallo",
-			requestSchema: z.object({ zwallo: z.number() }),
+			requestInit: {
+				method: "GET",
+			},
 			responseSchema: z.string(),
 		},
 	},
 });
 
-const hallo = await client.hallo({ hallo: "zwallo" });
-const zwallo = await client.zwallo({ zwallo: 123 });
-const drallo = await client.zwallo({ zwallo: "123" });
+const post = await client.post({ hallo: "hallo" });
+const get = await client.get();
 
 const endpoint = defineEndpoint({
 	path: "/hallo",
-	requestSchema: z.object({ hallo: z.string() }),
-	responseSchema: z.number(),
+	// requestSchema: z.object({ hallo: z.string() }),
+	// responseSchema: z.number(),
 });
 
-const lol = await endpoint({ hallo: 123 });
+const lol = await endpoint();
