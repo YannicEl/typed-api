@@ -1,8 +1,9 @@
-import type { z } from "zod";
+import type { Schema, z } from "zod";
 import type { ApiEndpoint, DefineEndpointParams } from "./endpoint.js";
 import { defineEndpoint } from "./endpoint.js";
+import type { Optional } from "./type.js";
 
-export type Endpoints = Record<string, DefineEndpointParams<unknown, unknown>>;
+export type Endpoints = Record<string, Optional<DefineEndpointParams, "path">>;
 
 export type DefineApiClientParams<T extends Endpoints> = {
 	baseUrl: string | URL;
@@ -13,8 +14,12 @@ export type DefineApiClientParams<T extends Endpoints> = {
 
 export type ApiClient<T extends Endpoints> = {
 	[Key in keyof T]: ApiEndpoint<
-		z.infer<T[Key]["requestSchema"]>,
-		z.infer<T[Key]["responseSchema"]>
+		T[Key]["requestSchema"] extends Schema
+			? z.infer<T[Key]["requestSchema"]>
+			: undefined,
+		T[Key]["responseSchema"] extends Schema
+			? z.infer<T[Key]["responseSchema"]>
+			: undefined
 	>;
 };
 
@@ -25,11 +30,12 @@ export function defineApiClient<T extends Endpoints>({
 	if (typeof baseUrl === "string") baseUrl = new URL(baseUrl);
 
 	const client = {} as ApiClient<T>;
-	for (const path in endpoints) {
-		const endpointParams = endpoints[path];
+	for (const key in endpoints) {
+		const endpointParams = endpoints[key];
+		if (!endpointParams.path) endpointParams.path = key;
 		endpointParams.path = new URL(endpointParams.path, baseUrl);
-		const endpoint = defineEndpoint(endpointParams);
-		client[path] = endpoint;
+		const endpoint = defineEndpoint(endpointParams as DefineEndpointParams);
+		client[key] = endpoint as ApiClient<T>[keyof T];
 	}
 
 	return client;

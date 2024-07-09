@@ -1,6 +1,9 @@
-import { z, type Schema } from "zod";
+import type { Schema } from "zod";
 
-export type DefineEndpointParams<RequestBody, ResponeBody> = {
+export type DefineEndpointParams<
+	RequestBody = unknown,
+	ResponeBody = unknown,
+> = {
 	path: string | URL;
 	requestInit?: RequestInit;
 	requestSchema?: Schema<RequestBody>;
@@ -8,61 +11,63 @@ export type DefineEndpointParams<RequestBody, ResponeBody> = {
 };
 
 export type ApiEndpoint<RequestBody, ResponseBody> =
-	| ((body: RequestBody) => Promise<ResponseBody>)
-	| ((body: RequestBody) => Promise<undefined>)
-	| (() => Promise<RequestBody>)
-	| (() => Promise<undefined>);
+	RequestBody extends undefined
+		? ResponseBody extends undefined
+			? () => Promise<undefined>
+			: () => Promise<ResponseBody>
+		: ResponseBody extends undefined
+			? (body: RequestBody) => Promise<undefined>
+			: (body: RequestBody) => Promise<ResponseBody>;
 
-export function defineEndpoint<RequestBody, ResponseBody>({
+type BaseParams = {
+	path: string | URL;
+	requestInit?: RequestInit;
+};
+
+export function defineEndpoint<RequestBody, ResponeBody>(
+	params: {
+		requestSchema: Schema<RequestBody>;
+		responseSchema: Schema<ResponeBody>;
+	} & BaseParams,
+): (params: RequestBody) => Promise<ResponeBody>;
+
+export function defineEndpoint<RequestBody, ResponeBody>(
+	params: {
+		requestSchema: Schema<RequestBody>;
+	} & BaseParams,
+): (params: RequestBody) => Promise<undefined>;
+
+export function defineEndpoint<RequestBody, ResponeBody>(
+	params: {
+		responseSchema: Schema<ResponeBody>;
+	} & BaseParams,
+): () => Promise<ResponeBody>;
+
+export function defineEndpoint<RequestBody, ResponeBody>(
+	params: BaseParams,
+): () => Promise<undefined>;
+
+export function defineEndpoint<RequestBody, ResponeBody>({
 	path,
-	requestInit,
+	requestInit = {},
 	requestSchema,
 	responseSchema,
-}: DefineEndpointParams<RequestBody, ResponseBody>): ApiEndpoint<
-	RequestBody,
-	ResponseBody
-> {
-	return async (body: RequestBody extends object ? true : RequestBody) => {
-		if (requestSchema) requestSchema.parse(body);
-		if (requestInit) requestInit.body = JSON.stringify(body);
+}: {
+	requestSchema?: Schema<RequestBody>;
+	responseSchema?: Schema<ResponeBody>;
+} & BaseParams) {
+	return async (body: RequestBody) => {
+		if (requestSchema) {
+			requestSchema.parse(body);
+			requestInit.body = JSON.stringify(body);
+		}
 
 		const res = await fetch(path, requestInit);
 
-		const json = await res.json();
-		const parsed = responseSchema?.parse(json);
-		return parsed as RequestBody;
+		if (responseSchema) {
+			const json = await res.json();
+			const parsed = responseSchema?.parse(json);
+			return parsed;
+		}
 	};
 }
-
-export function test<RequestBody, ResponeBody>(params: {
-	requestSchema: Schema<RequestBody>;
-	responseSchema: Schema<ResponeBody>;
-}): (params: RequestBody) => Promise<ResponeBody>;
-
-export function test<RequestBody, ResponeBody>(params: {
-	requestSchema: Schema<RequestBody>;
-}): (params: RequestBody) => Promise<undefined>;
-
-export function test<RequestBody, ResponeBody>(params: {
-	responseSchema: Schema<ResponeBody>;
-}): () => Promise<ResponeBody>;
-
-export function test(): () => Promise<undefined>;
-
-export function test<RequestBody, ResponeBody>(
-	req?: RequestBody,
-	res?: ResponeBody,
-): ApiEndpoint<RequestBody, ResponeBody> {
-	if (req && res) return async (req: RequestBody) => res;
-	if (req) return async (req: RequestBody) => undefined;
-	if (res) return async () => res;
-	return async () => undefined;
-}
-
-const requestSchema = z.object({ hallo: z.string() });
-const responseSchema = z.string();
-
-const lol1 = test({ requestSchema, responseSchema });
-const lol2 = test({ requestSchema });
-const lol3 = test({ responseSchema });
-const lol4 = test();
