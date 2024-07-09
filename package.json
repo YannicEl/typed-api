@@ -1,7 +1,7 @@
 {
 	"name": "@yannicel/typed-api",
 	"description": "Utility library for turning any REST api into a typesafe client",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"author": "Yannic Ellhotka <https://github.com/YannicEl>",
 	"license": "MIT",
 	"homepage": "https://github.com/YannicEl/typed-api/",
@@ -18,7 +18,8 @@
 	"scripts": {
 		"watch": "tsc --watch",
 		"build": "tsc",
-		"release": "changelogen --release --push",
+		"release": "pnpm bump:jsr && changelogen --release --push",
+		"bump:jsr": "node ./bump-jsr.js",
 		"release:jsr": "pnpm dlx jsr publish --allow-dirty",
 		"release:canary": "changelogen --canary && pnpm publish --no-git-checks --access public --tag canary",
 		"format": "biome check --write .",
@@ -28,6 +29,7 @@
 	"keywords": [],
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",
+		"@types/node": "20.14.10",
 		"changelogen": "0.5.5",
 		"typescript": "5.5.3",
 		"vitest": "2.0.1",
