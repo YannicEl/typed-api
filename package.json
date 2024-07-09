@@ -1,7 +1,7 @@
 {
 	"name": "@yannicel/typed-api",
 	"description": "Utility library for turning any REST api into a typesafe client",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"author": "Yannic Ellhotka <https://github.com/YannicEl>",
 	"license": "MIT",
 	"homepage": "https://github.com/YannicEl/typed-api/",
@@ -18,7 +18,7 @@
 	"scripts": {
 		"watch": "tsc --watch",
 		"build": "tsc",
-		"release": "pnpm bump:jsr && changelogen --release --push",
+		"release": "pnpm bump:jsr && changelogen --release",
 		"bump:jsr": "node ./bump-jsr.js",
 		"release:jsr": "pnpm dlx jsr publish --allow-dirty",
 		"release:canary": "changelogen --canary && pnpm publish --no-git-checks --access public --tag canary",
