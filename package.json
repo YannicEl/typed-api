@@ -35,7 +35,8 @@
 		"release:canary": "changelogen --canary && pnpm publish --no-git-checks --access public --tag canary",
 		"format": "biome check --write .",
 		"format:check": "biome check .",
-		"test": "vitest run"
+		"test": "vitest run",
+		"test:watch": "vitest"
 	},
 	"keywords": [],
 	"devDependencies": {
