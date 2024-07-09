@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.1.0
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.0.9...v0.1.0)
+
+### 🏡 Chore
+
+- ⚠️  Cleanup stuff ([eeb75f6](https://github.com/YannicEl/typed-api/commit/eeb75f6))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Cleanup stuff ([eeb75f6](https://github.com/YannicEl/typed-api/commit/eeb75f6))
+
+### ❤️ Contributors
+
+- YannicEl ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.0.9
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.0.5...v0.0.9)
