@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.2
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.1.1...v0.1.2)
+
+### 🏡 Chore
+
+- Biome config ([4d0bf71](https://github.com/YannicEl/typed-api/commit/4d0bf71))
+
+### ❤️ Contributors
+
+- YannicEl ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.1.1
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.1.0...v0.1.1)
