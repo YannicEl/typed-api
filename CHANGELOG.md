@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.0.8
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.0.5...v0.0.8)
+
+### 🏡 Chore
+
+- Added jsr release ([49b6003](https://github.com/YannicEl/typed-api/commit/49b6003))
+- **release:** V0.0.6 ([1d7bc7b](https://github.com/YannicEl/typed-api/commit/1d7bc7b))
+- Breaking test ([c2c240e](https://github.com/YannicEl/typed-api/commit/c2c240e))
+- **release:** V0.0.7 ([c80f6a9](https://github.com/YannicEl/typed-api/commit/c80f6a9))
+- Removed jsr release ([2e5d180](https://github.com/YannicEl/typed-api/commit/2e5d180))
+
+### ❤️ Contributors
+
+- YannicEl ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.0.7
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.0.5...v0.0.7)
