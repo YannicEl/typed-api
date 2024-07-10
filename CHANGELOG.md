@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v0.1.4
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.1.3...v0.1.4)
+
+### 🚀 Enhancements
+
+- Set global headers for client ([239a315](https://github.com/YannicEl/typed-api/commit/239a315))
+- Added before request hook ([8bd4c67](https://github.com/YannicEl/typed-api/commit/8bd4c67))
+
+### ❤️ Contributors
+
+- Yannic ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.1.3
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.1.2...v0.1.3)
