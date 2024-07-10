@@ -7,6 +7,7 @@ export type Endpoints = Record<string, Optional<DefineEndpointParams, "path">>;
 
 export type DefineApiClientParams<T extends Endpoints> = {
 	baseUrl: string | URL;
+	globalHeaders?: HeadersInit;
 	endpoints: {
 		[Key in keyof T]: T[Key];
 	};
@@ -25,6 +26,7 @@ export type ApiClient<T extends Endpoints> = {
 
 export function defineApiClient<T extends Endpoints>({
 	baseUrl,
+	globalHeaders,
 	endpoints,
 }: DefineApiClientParams<T>): ApiClient<T> {
 	if (typeof baseUrl === "string") baseUrl = new URL(baseUrl);
@@ -32,8 +34,22 @@ export function defineApiClient<T extends Endpoints>({
 	const client = {} as ApiClient<T>;
 	for (const key in endpoints) {
 		const endpointParams = endpoints[key];
+		if (!endpointParams.requestInit) endpointParams.requestInit = {};
+
+		// Use the key as the path if it's not provided
 		if (!endpointParams.path) endpointParams.path = key;
 		endpointParams.path = new URL(endpointParams.path, baseUrl);
+
+		// Merge global headers with endpoint headers
+		if (globalHeaders) {
+			const endpointHeaders = new Headers(endpointParams.requestInit.headers);
+			new Headers(globalHeaders).forEach((value, key) => {
+				if (!endpointHeaders.has(key)) endpointHeaders.set(key, value);
+			});
+
+			endpointParams.requestInit.headers = endpointHeaders;
+		}
+
 		const endpoint = defineEndpoint(endpointParams as DefineEndpointParams);
 		client[key] = endpoint as ApiClient<T>[keyof T];
 	}

@@ -1,11 +1,14 @@
 import type { Schema } from "zod";
 
+type BaseParams = {
+	path: string | URL;
+	requestInit?: RequestInit;
+};
+
 export type DefineEndpointParams<
 	RequestBody = unknown,
 	ResponeBody = unknown,
-> = {
-	path: string | URL;
-	requestInit?: RequestInit;
+> = BaseParams & {
 	requestSchema?: Schema<RequestBody>;
 	responseSchema?: Schema<ResponeBody>;
 };
@@ -18,11 +21,6 @@ export type ApiEndpoint<RequestBody, ResponseBody> =
 		: ResponseBody extends undefined
 			? (body: RequestBody) => Promise<undefined>
 			: (body: RequestBody) => Promise<ResponseBody>;
-
-type BaseParams = {
-	path: string | URL;
-	requestInit?: RequestInit;
-};
 
 export function defineEndpoint<RequestBody, ResponeBody>(
 	params: {
