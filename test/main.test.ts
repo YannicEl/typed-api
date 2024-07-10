@@ -32,10 +32,20 @@ beforeEach(() => {
 test("test", async () => {
 	const client = defineApiClient({
 		baseUrl: MOCK_SERVER_URL,
+		globalHeaders: {
+			"Content-Type": "application/json",
+		},
 		endpoints: {
 			hallo: {
 				requestInit: {
 					method: "POST",
+				},
+				hooks: {
+					beforeRequest({ path, requestInit }) {
+						requestInit.headers = new Headers(requestInit.headers);
+						requestInit.headers.set("tets", "123");
+						return { path, requestInit };
+					},
 				},
 				requestSchema: z.object({ hallo: z.string() }),
 				responseSchema: z.string(),

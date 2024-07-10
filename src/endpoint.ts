@@ -3,6 +3,12 @@ import type { Schema } from "zod";
 type BaseParams = {
 	path: string | URL;
 	requestInit?: RequestInit;
+	hooks?: Partial<{
+		beforeRequest: (params: {
+			path: string | URL;
+			requestInit: RequestInit;
+		}) => { path: string | URL; requestInit: RequestInit };
+	}>;
 };
 
 export type DefineEndpointParams<
@@ -48,6 +54,7 @@ export function defineEndpoint<RequestBody, ResponeBody>(
 export function defineEndpoint<RequestBody, ResponeBody>({
 	path,
 	requestInit = {},
+	hooks,
 	requestSchema,
 	responseSchema,
 }: {
@@ -58,6 +65,12 @@ export function defineEndpoint<RequestBody, ResponeBody>({
 		if (requestSchema) {
 			requestSchema.parse(body);
 			requestInit.body = JSON.stringify(body);
+		}
+
+		if (hooks?.beforeRequest) {
+			const fetchParams = hooks.beforeRequest({ path, requestInit });
+			path = fetchParams.path;
+			requestInit = fetchParams.requestInit;
 		}
 
 		const res = await fetch(path, requestInit);
