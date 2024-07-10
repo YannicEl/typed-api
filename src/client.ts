@@ -1,13 +1,20 @@
 import type { Schema, z } from "zod";
-import type { ApiEndpoint, DefineEndpointParams } from "./endpoint.js";
+import type {
+	ApiEndpoint,
+	DefineEndpointParams,
+	EndpointHooks,
+} from "./endpoint.js";
 import { defineEndpoint } from "./endpoint.js";
 import type { Optional } from "./type.js";
 
-export type Endpoints = Record<string, Optional<DefineEndpointParams, "path">>;
+export type Endpoints = {
+	[key: string]: Optional<DefineEndpointParams, "path">;
+};
 
 export type DefineApiClientParams<T extends Endpoints> = {
 	baseUrl: string | URL;
 	globalHeaders?: HeadersInit;
+	globalHooks?: Partial<EndpointHooks>;
 	endpoints: {
 		[Key in keyof T]: T[Key];
 	};
@@ -27,6 +34,7 @@ export type ApiClient<T extends Endpoints> = {
 export function defineApiClient<T extends Endpoints>({
 	baseUrl,
 	globalHeaders,
+	globalHooks,
 	endpoints,
 }: DefineApiClientParams<T>): ApiClient<T> {
 	if (typeof baseUrl === "string") baseUrl = new URL(baseUrl);
@@ -49,6 +57,8 @@ export function defineApiClient<T extends Endpoints>({
 
 			endpointParams.requestInit.headers = endpointHeaders;
 		}
+
+		endpointParams.hooks = { ...globalHooks, ...(endpointParams.hooks ?? {}) };
 
 		const endpoint = defineEndpoint(endpointParams as DefineEndpointParams);
 		client[key] = endpoint as ApiClient<T>[keyof T];
