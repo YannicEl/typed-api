@@ -5,10 +5,12 @@ import type {
 	EndpointHooks,
 } from "./endpoint.js";
 import { defineEndpoint } from "./endpoint.js";
-import type { Optional } from "./type.js";
+import type { NonEmptyObject, Optional } from "./type.js";
 
-export type Endpoints = {
-	[key: string]: Optional<DefineEndpointParams, "path">;
+export type Endpoints<T = any> = {
+	[Key in keyof T]: T[Key] extends DefineEndpointParams
+		? Optional<DefineEndpointParams, "path">
+		: Endpoints<T[Key]>;
 };
 
 export type DefineApiClientParams<T extends Endpoints> = {
@@ -21,14 +23,16 @@ export type DefineApiClientParams<T extends Endpoints> = {
 };
 
 export type ApiClient<T extends Endpoints> = {
-	[Key in keyof T]: ApiEndpoint<
-		T[Key]["requestSchema"] extends Schema
-			? z.infer<T[Key]["requestSchema"]>
-			: undefined,
-		T[Key]["responseSchema"] extends Schema
-			? z.infer<T[Key]["responseSchema"]>
-			: undefined
-	>;
+	[Key in keyof T]: T[Key] extends Endpoints & NonEmptyObject<T[Key]>
+		? ApiClient<T[Key]>
+		: ApiEndpoint<
+				T[Key]["requestSchema"] extends Schema
+					? z.infer<T[Key]["requestSchema"]>
+					: undefined,
+				T[Key]["responseSchema"] extends Schema
+					? z.infer<T[Key]["responseSchema"]>
+					: undefined
+			>;
 };
 
 export function defineApiClient<T extends Endpoints>({
