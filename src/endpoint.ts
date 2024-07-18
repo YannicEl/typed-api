@@ -79,7 +79,7 @@ export function defineEndpoint<RequestBody, ResponeBody>({
 
 		if (responseSchema) {
 			const json = await res.json();
-			const parsed = responseSchema?.parse(json);
+			const parsed = responseSchema.parse(json);
 			return parsed;
 		}
 	};
