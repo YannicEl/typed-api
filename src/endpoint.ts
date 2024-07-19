@@ -7,18 +7,18 @@ export type EndpointHooks = {
 	}) => { path: string | URL; requestInit: RequestInit };
 };
 
-type BaseParams = {
+export type BaseParams = {
 	path: string | URL;
 	requestInit?: RequestInit;
 	hooks?: Partial<EndpointHooks>;
 };
 
 export type DefineEndpointParams<
-	RequestBody = unknown,
-	ResponeBody = unknown,
+	RequestBodySchema extends Schema = Schema<unknown>,
+	ResponeBodySchema extends Schema = Schema<unknown>,
 > = BaseParams & {
-	requestSchema?: Schema<RequestBody>;
-	responseSchema?: Schema<ResponeBody>;
+	requestSchema?: RequestBodySchema;
+	responseSchema?: ResponeBodySchema;
 };
 
 export type ApiEndpoint<RequestBody, ResponseBody> =

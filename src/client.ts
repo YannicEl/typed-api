@@ -1,19 +1,30 @@
 import type { Schema, z } from "zod";
 import type {
 	ApiEndpoint,
+	BaseParams,
 	DefineEndpointParams,
 	EndpointHooks,
 } from "./endpoint.js";
 import { defineEndpoint } from "./endpoint.js";
-import type { NonEmptyObject, Optional } from "./type.js";
+import type { Optional } from "./type.js";
 
-export type Endpoints<T = any> = {
-	[Key in keyof T]: T[Key] extends DefineEndpointParams
-		? Optional<DefineEndpointParams, "path">
-		: Endpoints<T[Key]>;
-};
+export type EndpointParams = Optional<BaseParams, "path"> &
+	(
+		| {
+				requestSchema?: Schema;
+				responseSchema?: Schema;
+				endpoints?: never;
+		  }
+		| {
+				endpoints?: EndpointGroup;
+				requestSchema?: never;
+				responseSchema?: never;
+		  }
+	);
 
-export type DefineApiClientParams<T extends Endpoints> = {
+export type EndpointGroup = Record<string, EndpointParams>;
+
+export type DefineApiClientParams<T> = {
 	baseUrl: string | URL;
 	globalHeaders?: HeadersInit;
 	globalHooks?: Partial<EndpointHooks>;
@@ -22,9 +33,9 @@ export type DefineApiClientParams<T extends Endpoints> = {
 	};
 };
 
-export type ApiClient<T extends Endpoints> = {
-	[Key in keyof T]: T[Key] extends Endpoints & NonEmptyObject<T[Key]>
-		? ApiClient<T[Key]>
+export type ApiClient<T extends EndpointGroup> = {
+	[Key in keyof T]: T[Key]["endpoints"] extends EndpointGroup
+		? ApiClient<T[Key]["endpoints"]>
 		: ApiEndpoint<
 				T[Key]["requestSchema"] extends Schema
 					? z.infer<T[Key]["requestSchema"]>
@@ -35,7 +46,7 @@ export type ApiClient<T extends Endpoints> = {
 			>;
 };
 
-export function defineApiClient<T extends Endpoints>({
+export function defineApiClient<T extends EndpointGroup>({
 	baseUrl,
 	globalHeaders,
 	globalHooks,
@@ -50,7 +61,7 @@ export function defineApiClient<T extends Endpoints>({
 
 		// Use the key as the path if it's not provided
 		if (!endpointParams.path) endpointParams.path = key;
-		endpointParams.path = new URL(endpointParams.path, baseUrl);
+		endpointParams.path = new URL(endpointParams.path as string | URL, baseUrl);
 
 		// Merge global headers with endpoint headers
 		if (globalHeaders) {
