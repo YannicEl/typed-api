@@ -12,8 +12,6 @@ describe("test", () => {
 			},
 		});
 
-		console.log(server.url);
-
 		const client = defineApiClient({
 			baseUrl: server.url,
 			endpoints: {
