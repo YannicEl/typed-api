@@ -1,6 +1,44 @@
 # Changelog
 
 
+## v0.2.0
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.1.4...v0.2.0)
+
+### 🚀 Enhancements
+
+- Added global hooks ([2c59127](https://github.com/YannicEl/typed-api/commit/2c59127))
+- Throw on not ok request ([fab3ef2](https://github.com/YannicEl/typed-api/commit/fab3ef2))
+
+### 🩹 Fixes
+
+- Type stuff ([e941701](https://github.com/YannicEl/typed-api/commit/e941701))
+- Remove logging ([3d0b6fd](https://github.com/YannicEl/typed-api/commit/3d0b6fd))
+
+### 💅 Refactors
+
+- Removed unnecessary optional chaining ([b84e98a](https://github.com/YannicEl/typed-api/commit/b84e98a))
+- ⚠️  Refactored endpoint nesting ([c21b0ed](https://github.com/YannicEl/typed-api/commit/c21b0ed))
+
+### 🏡 Chore
+
+- Updated readme ([f09a6dd](https://github.com/YannicEl/typed-api/commit/f09a6dd))
+- Updated readme ([f560c3d](https://github.com/YannicEl/typed-api/commit/f560c3d))
+
+### ✅ Tests
+
+- Enabled type testing ([7521f32](https://github.com/YannicEl/typed-api/commit/7521f32))
+- Refactored tests ([c05492e](https://github.com/YannicEl/typed-api/commit/c05492e))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Refactored endpoint nesting ([c21b0ed](https://github.com/YannicEl/typed-api/commit/c21b0ed))
+
+### ❤️ Contributors
+
+- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.1.4
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.1.3...v0.1.4)
