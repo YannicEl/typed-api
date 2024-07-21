@@ -61,22 +61,34 @@ export function defineApiClient<T extends EndpointGroup>({
 
 		// Use the key as the path if it's not provided
 		if (!endpointParams.path) endpointParams.path = key;
-		endpointParams.path = new URL(endpointParams.path as string | URL, baseUrl);
+		const url = new URL(baseUrl);
+		url.pathname = [url.pathname.substring(1), endpointParams.path].join("/");
+		endpointParams.path = url;
 
-		// Merge global headers with endpoint headers
-		if (globalHeaders) {
-			const endpointHeaders = new Headers(endpointParams.requestInit.headers);
-			new Headers(globalHeaders).forEach((value, key) => {
-				if (!endpointHeaders.has(key)) endpointHeaders.set(key, value);
-			});
+		if ("endpoints" in endpointParams && endpointParams.endpoints) {
+			client[key] = defineApiClient({
+				baseUrl: endpointParams.path,
+				endpoints: endpointParams.endpoints,
+			}) as ApiClient<T>[keyof T];
+		} else {
+			// Merge global headers with endpoint headers
+			if (globalHeaders) {
+				const endpointHeaders = new Headers(endpointParams.requestInit.headers);
+				new Headers(globalHeaders).forEach((value, key) => {
+					if (!endpointHeaders.has(key)) endpointHeaders.set(key, value);
+				});
 
-			endpointParams.requestInit.headers = endpointHeaders;
+				endpointParams.requestInit.headers = endpointHeaders;
+			}
+
+			endpointParams.hooks = {
+				...globalHooks,
+				...(endpointParams.hooks ?? {}),
+			};
+
+			const endpoint = defineEndpoint(endpointParams as DefineEndpointParams);
+			client[key] = endpoint as ApiClient<T>[keyof T];
 		}
-
-		endpointParams.hooks = { ...globalHooks, ...(endpointParams.hooks ?? {}) };
-
-		const endpoint = defineEndpoint(endpointParams as DefineEndpointParams);
-		client[key] = endpoint as ApiClient<T>[keyof T];
 	}
 
 	return client;

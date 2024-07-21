@@ -96,4 +96,30 @@ describe("test", () => {
 		const hallo = await client.hallo();
 		expect(hallo).toBe(undefined);
 	});
+
+	test("Nesting works", async () => {
+		await using server = await startMockServer({
+			"GET /hallo/zwallo": (req, res) => {
+				res.end();
+			},
+		});
+
+		const client = defineApiClient({
+			baseUrl: server.url,
+			endpoints: {
+				hallo: {
+					endpoints: {
+						zwallo: {
+							requestInit: {
+								method: "GET",
+							},
+						},
+					},
+				},
+			},
+		});
+
+		const hallo = await client.hallo.zwallo();
+		expect(hallo).toBe(undefined);
+	});
 });
