@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.1
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.0...v0.2.1)
+
+### 🚀 Enhancements
+
+- Added nesting ([9bb09aa](https://github.com/YannicEl/typed-api/commit/9bb09aa))
+
+### ❤️ Contributors
+
+- YannicEl ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.2.0
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.1.4...v0.2.0)
