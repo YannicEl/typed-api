@@ -6,6 +6,7 @@ export type {
 export { defineApiClient } from "./client.js";
 export type {
 	BeforeRequestHook,
+	FetchParams,
 	ApiEndpoint,
 	DefineEndpointParams,
 } from "./endpoint.js";
