@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.4
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.3...v0.2.4)
+
+### 🩹 Fixes
+
+- Nesting path joining ([9003fda](https://github.com/YannicEl/typed-api/commit/9003fda))
+
+### ❤️ Contributors
+
+- YannicEl ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.2.3
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.2...v0.2.3)
