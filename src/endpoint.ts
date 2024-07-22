@@ -1,9 +1,13 @@
 import type { Schema } from "zod";
 
-export type BeforeRequestHook = (params: {
+export type FetchParams = {
 	path: string | URL;
 	requestInit: RequestInit;
-}) => { path: string | URL; requestInit: RequestInit };
+};
+
+export type BeforeRequestHook = (
+	params: FetchParams,
+) => Promise<FetchParams> | FetchParams;
 
 export type EndpointHooks = {
 	beforeRequest: BeforeRequestHook;
@@ -72,7 +76,7 @@ export function defineEndpoint<RequestBody, ResponeBody>({
 		}
 
 		if (hooks?.beforeRequest) {
-			const fetchParams = hooks.beforeRequest({ path, requestInit });
+			const fetchParams = await hooks.beforeRequest({ path, requestInit });
 			path = fetchParams.path;
 			requestInit = fetchParams.requestInit;
 		}
