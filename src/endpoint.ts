@@ -83,7 +83,10 @@ export function defineEndpoint<RequestBody, ResponeBody>({
 
 		const res = await fetch(path, requestInit);
 
-		if (!res.ok) throw new Error("Request failed");
+		if (!res.ok) {
+			const error = await res.json();
+			throw error;
+		}
 
 		if (responseSchema) {
 			const json = await res.json();
