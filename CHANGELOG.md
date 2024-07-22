@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.2.2
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.1...v0.2.2)
+
+### 🚀 Enhancements
+
+- Added type for hook functions ([e96ebe2](https://github.com/YannicEl/typed-api/commit/e96ebe2))
+- Allow async hooks ([78ed545](https://github.com/YannicEl/typed-api/commit/78ed545))
+
+### 🩹 Fixes
+
+- Export type ([e23def6](https://github.com/YannicEl/typed-api/commit/e23def6))
+
+### ❤️ Contributors
+
+- YannicEl ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.2.1
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.0...v0.2.1)

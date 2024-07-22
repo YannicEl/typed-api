@@ -1,7 +1,7 @@
 {
 	"name": "@yannicel/typed-api",
 	"description": "Utility library for turning any REST api into a typesafe client",
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"author": "Yannic Ellhotka <https://github.com/YannicEl>",
 	"license": "MIT",
 	"homepage": "https://github.com/YannicEl/typed-api/",
