@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.3
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.2...v0.2.3)
+
+### 🩹 Fixes
+
+- Added type export ([4433fda](https://github.com/YannicEl/typed-api/commit/4433fda))
+
+### ❤️ Contributors
+
+- YannicEl ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.2.2
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.1...v0.2.2)
