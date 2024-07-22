@@ -2,6 +2,7 @@ export type {
 	ApiClient,
 	DefineApiClientParams,
 	EndpointGroup,
+	EndpointParams,
 } from "./client.js";
 export { defineApiClient } from "./client.js";
 export type {
