@@ -73,6 +73,8 @@ export function defineApiClient<T extends EndpointGroup>({
 		if ("endpoints" in endpointParams && endpointParams.endpoints) {
 			client[key] = defineApiClient({
 				baseUrl: endpointParams.path,
+				globalHooks: endpointParams.hooks ?? globalHooks,
+				globalHeaders: endpointParams.requestInit?.headers ?? globalHeaders,
 				endpoints: endpointParams.endpoints,
 			}) as ApiClient<T>[keyof T];
 		} else {
