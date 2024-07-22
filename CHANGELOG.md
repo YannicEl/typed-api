@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.7
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.6...v0.2.7)
+
+### 🚀 Enhancements
+
+- Throw error on not ok request ([fdca695](https://github.com/YannicEl/typed-api/commit/fdca695))
+
+### ❤️ Contributors
+
+- YannicEl ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.2.6
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.5...v0.2.6)
