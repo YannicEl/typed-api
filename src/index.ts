@@ -4,5 +4,9 @@ export type {
 	EndpointGroup,
 } from "./client.js";
 export { defineApiClient } from "./client.js";
-export type { ApiEndpoint, DefineEndpointParams } from "./endpoint.js";
+export type {
+	BeforeRequestHook,
+	ApiEndpoint,
+	DefineEndpointParams,
+} from "./endpoint.js";
 export { defineEndpoint } from "./endpoint.js";

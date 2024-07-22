@@ -1,10 +1,12 @@
 import type { Schema } from "zod";
 
+export type BeforeRequestHook = (params: {
+	path: string | URL;
+	requestInit: RequestInit;
+}) => { path: string | URL; requestInit: RequestInit };
+
 export type EndpointHooks = {
-	beforeRequest: (params: {
-		path: string | URL;
-		requestInit: RequestInit;
-	}) => { path: string | URL; requestInit: RequestInit };
+	beforeRequest: BeforeRequestHook;
 };
 
 export type BaseParams = {
