@@ -61,9 +61,14 @@ export function defineApiClient<T extends EndpointGroup>({
 
 		// Use the key as the path if it's not provided
 		if (!endpointParams.path) endpointParams.path = key;
-		const url = new URL(baseUrl);
-		url.pathname = [url.pathname.substring(1), endpointParams.path].join("/");
-		endpointParams.path = url;
+		if (typeof endpointParams.path === "string") {
+			const url = new URL(baseUrl);
+			url.pathname = [
+				url.pathname.substring(1),
+				...endpointParams.path.split("/").filter(Boolean),
+			].join("/");
+			endpointParams.path = url;
+		}
 
 		if ("endpoints" in endpointParams && endpointParams.endpoints) {
 			client[key] = defineApiClient({
