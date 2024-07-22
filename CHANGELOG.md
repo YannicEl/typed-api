@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.6
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.5...v0.2.6)
+
+### 🩹 Fixes
+
+- Apply global overrides on nested routes ([c7874c2](https://github.com/YannicEl/typed-api/commit/c7874c2))
+
+### ❤️ Contributors
+
+- YannicEl ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.2.5
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.4...v0.2.5)
