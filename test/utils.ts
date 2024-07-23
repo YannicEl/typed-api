@@ -15,12 +15,13 @@ export async function startMockServer(
 		for await (const [route, handler] of Object.entries(routes)) {
 			const parts = route.split(" ");
 
+			const url = new URL(`http://0.0.0.0${request.url}`);
 			if (parts.length === 1) {
-				if (request.url === parts[0]) {
+				if (url.pathname === parts[0]) {
 					return handler(request, response);
 				}
 			} else {
-				if (request.method === parts[0] && request.url === parts[1]) {
+				if (request.method === parts[0] && url.pathname === parts[1]) {
 					return handler(request, response);
 				}
 			}

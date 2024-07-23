@@ -42,11 +42,12 @@ export type ApiClient<T extends EndpointGroup> = {
 					: undefined,
 				T[Key]["responseSchema"] extends Schema
 					? z.infer<T[Key]["responseSchema"]>
-					: undefined
+					: undefined,
+				T[Key]["path"] extends string ? T[Key]["path"] : never
 			>;
 };
 
-export function defineApiClient<T extends EndpointGroup>({
+export function defineApiClient<const T extends EndpointGroup>({
 	baseUrl,
 	globalHeaders,
 	globalHooks,
@@ -63,9 +64,12 @@ export function defineApiClient<T extends EndpointGroup>({
 		if (!endpointParams.path) endpointParams.path = key;
 		if (typeof endpointParams.path === "string") {
 			const url = new URL(baseUrl);
+			const [path = "", search] = endpointParams.path.split("?");
+			if (search) url.search = search;
+
 			url.pathname = [
 				url.pathname.substring(1),
-				...endpointParams.path.split("/").filter(Boolean),
+				...path.split("/").filter(Boolean),
 			].join("/");
 			endpointParams.path = url;
 		}

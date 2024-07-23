@@ -1,4 +1,5 @@
 import type { Schema } from "zod";
+import type { NonEmptyObject, UrlParams } from "./type.js";
 
 export type FetchParams = {
 	path: string | URL;
@@ -27,27 +28,41 @@ export type DefineEndpointParams<
 	responseSchema?: ResponeBodySchema;
 };
 
-export type ApiEndpoint<RequestBody, ResponseBody> =
-	RequestBody extends undefined
-		? ResponseBody extends undefined
+export type ApiEndpoint<
+	RequestBody,
+	ResponseBody,
+	Path = never,
+> = RequestBody extends undefined
+	? ResponseBody extends undefined
+		? NonEmptyObject<UrlParams<Path>> extends never
 			? () => Promise<undefined>
-			: () => Promise<ResponseBody>
-		: ResponseBody extends undefined
+			: (urlParams: UrlParams<Path>) => Promise<undefined>
+		: NonEmptyObject<UrlParams<Path>> extends never
+			? () => Promise<ResponseBody>
+			: (urlParams: UrlParams<Path>) => Promise<ResponseBody>
+	: ResponseBody extends undefined
+		? NonEmptyObject<UrlParams<Path>> extends never
 			? (body: RequestBody) => Promise<undefined>
-			: (body: RequestBody) => Promise<ResponseBody>;
+			: (body: RequestBody, urlParams: UrlParams<Path>) => Promise<undefined>
+		: NonEmptyObject<UrlParams<Path>> extends never
+			? (body: RequestBody) => Promise<ResponseBody>
+			: (
+					body: RequestBody,
+					urlParams: UrlParams<Path>,
+				) => Promise<ResponseBody>;
 
 export function defineEndpoint<RequestBody, ResponeBody>(
 	params: {
 		requestSchema: Schema<RequestBody>;
 		responseSchema: Schema<ResponeBody>;
 	} & BaseParams,
-): (params: RequestBody) => Promise<ResponeBody>;
+): (body: RequestBody) => Promise<ResponeBody>;
 
 export function defineEndpoint<RequestBody, ResponeBody>(
 	params: {
 		requestSchema: Schema<RequestBody>;
 	} & BaseParams,
-): (params: RequestBody) => Promise<undefined>;
+): (body: RequestBody) => Promise<undefined>;
 
 export function defineEndpoint<RequestBody, ResponeBody>(
 	params: {
@@ -69,10 +84,32 @@ export function defineEndpoint<RequestBody, ResponeBody>({
 	requestSchema?: Schema<RequestBody>;
 	responseSchema?: Schema<ResponeBody>;
 } & BaseParams) {
-	return async (body: RequestBody) => {
+	return async (
+		...args:
+			| [body: RequestBody, params: UrlParams]
+			| [params: UrlParams]
+			| [body: RequestBody]
+			| []
+	) => {
+		path = new URL(path);
+
+		let body: RequestBody | undefined;
+		if (args.length >= 1 && requestSchema) body = args[0] as RequestBody;
+
+		let params: UrlParams = {};
+		if (args.length === 1 && !requestSchema) params = args[0] as UrlParams;
+		if (args.length === 2) params = args[1] as UrlParams;
+
 		if (requestSchema) {
 			requestSchema.parse(body);
 			requestInit.body = JSON.stringify(body);
+		}
+
+		for (const [key, value] of Object.entries(params)) {
+			path.pathname = path.pathname.replace(`:${key}`, value as string);
+			if (path.searchParams.has(key)) {
+				path.searchParams.set(key, value as string);
+			}
 		}
 
 		if (hooks?.beforeRequest) {

@@ -122,4 +122,33 @@ describe("test", () => {
 		const hallo = await client.hallo.zwallo();
 		expect(hallo).toBe(undefined);
 	});
+
+	test("Url paramter work", async () => {
+		await using server = await startMockServer({
+			"GET /hallo_param/zwallo_param/drallo": (req, res) => {
+				res.end(JSON.stringify({ url: req.url }));
+			},
+		});
+
+		const client = defineApiClient({
+			baseUrl: server.url,
+			endpoints: {
+				hallo: {
+					path: "/:hallo/:zwallo/drallo?search&param",
+					responseSchema: z.object({ url: z.string() }),
+				},
+			},
+		});
+
+		const params = {
+			hallo: "hallo_param",
+			zwallo: "zwallo_param",
+			search: "search_param",
+		};
+
+		const { url } = await client.hallo(params);
+		expect(url).toBe(
+			`/${params.hallo}/${params.zwallo}/drallo?search=${params.search}&param=`,
+		);
+	});
 });
