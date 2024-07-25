@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - 'main'
-  pull_request:
-    branches:
-      - 'main'
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -48,7 +45,7 @@ jobs:
         run: pnpm test
 
       - name: Publish canary release on npm
-        if: startsWith(github.event.head_commit.message, 'chore(release)') == false
+        if: startsWith(github.event.head_commit.message, 'chore(release)') == false && github.event_name == 'push'
         run: pnpm run release:canary
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
