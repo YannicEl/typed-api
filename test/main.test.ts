@@ -144,11 +144,12 @@ describe("test", () => {
 			hallo: "hallo_param",
 			zwallo: "zwallo_param",
 			search: "search_param",
+			param: "param_param",
 		};
 
 		const { url } = await client.hallo(params);
 		expect(url).toBe(
-			`/${params.hallo}/${params.zwallo}/drallo?search=${params.search}&param=`,
+			`/${params.hallo}/${params.zwallo}/drallo?search=${params.search}&param=${params.param}`,
 		);
 	});
 });

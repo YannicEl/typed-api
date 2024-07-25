@@ -16,17 +16,16 @@ type ExtractPathParameter<Path> = (
 	? IsPathParameter<PartA> | ExtractPathParameter<PartB>
 	: IsPathParameter<Path>;
 
-type IsSearchParameter<Path> = Path extends `&${infer SearchParam}`
-	? SearchParam
-	: never;
+export type Split<
+	String,
+	Character extends string,
+> = String extends `${infer PartA}${Character}${infer PartB}`
+	? PartA | Split<PartB, Character>
+	: String;
 
-type ExtractSearchParameter<Path> = (
-	Path extends `${string}?${infer SearchPart}`
-		? SearchPart
-		: Path
-) extends `${infer PartA}&${infer PartB}`
-	? IsSearchParameter<`&${PartA}`> | ExtractSearchParameter<PartB>
-	: IsSearchParameter<Path>;
+type ExtractSearchParameter<Path> = Path extends `${string}?${infer SearchPart}`
+	? Split<SearchPart, "&">
+	: never;
 
 export type UrlParams<Path = ""> = Path extends never
 	? never
