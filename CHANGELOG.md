@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v0.2.8
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.7...v0.2.8)
+
+### 🚀 Enhancements
+
+- Added typed path and search parameters ([4c648b1](https://github.com/YannicEl/typed-api/commit/4c648b1))
+
+### 🩹 Fixes
+
+- Search param type parsing ([222ab76](https://github.com/YannicEl/typed-api/commit/222ab76))
+
+### 🤖 CI
+
+- Dont publish canry on pull request ([a9168be](https://github.com/YannicEl/typed-api/commit/a9168be))
+
+### ❤️ Contributors
+
+- Yannic ([@YannicEl](http://github.com/YannicEl))
+- YannicEl ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.2.7
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.6...v0.2.7)
