@@ -20,7 +20,6 @@
 ### ❤️ Contributors
 
 - Yannic ([@YannicEl](http://github.com/YannicEl))
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.2.7
 
@@ -32,7 +31,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.2.6
 
@@ -44,7 +43,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.2.5
 
@@ -60,7 +59,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.2.3
 
@@ -72,7 +71,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.2.2
 
@@ -89,7 +88,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.2.1
 
@@ -101,7 +100,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.2.0
 
@@ -138,7 +137,6 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
 - Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.1.4
@@ -173,7 +171,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.1.2
 
@@ -185,7 +183,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.1.1
 
@@ -197,7 +195,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.1.0
 
@@ -213,7 +211,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.0.9
 
@@ -230,7 +228,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.0.8
 
@@ -246,7 +244,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.0.7
 
@@ -260,7 +258,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.0.6
 
@@ -272,7 +270,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.0.5
 
@@ -284,7 +282,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.0.4
 
@@ -296,7 +294,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.0.3
 
@@ -318,7 +316,7 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
 ## v0.0.2-1720513103.aa97054
 
@@ -329,5 +327,5 @@
 
 ### ❤️ Contributors
 
-- YannicEl ([@YannicEl](http://github.com/YannicEl))
+- Yannic ([@YannicEl](http://github.com/YannicEl))
 
