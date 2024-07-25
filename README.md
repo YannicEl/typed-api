@@ -1,5 +1,7 @@
 # Utility library for turning any REST api into a typesafe client
 
+[![npm](https://img.shields.io/npm/v/@yannicel/typed-api)](https://www.npmjs.com/package/@yannicel/typed-api)
+
 ```js
 import { defineApiClient } from "@yannicel/typed-api";
 import { z } from "zod";
