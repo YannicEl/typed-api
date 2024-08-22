@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.11
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.10...v0.2.11)
+
+### 🚀 Enhancements
+
+- Added after request hook ([9f64d50](https://github.com/YannicEl/typed-api/commit/9f64d50))
+
+### ❤️ Contributors
+
+- Yannic ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.2.10
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.9...v0.2.10)
