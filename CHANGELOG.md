@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.10
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.9...v0.2.10)
+
+### 🩹 Fixes
+
+- Broken release ([587f9fc](https://github.com/YannicEl/typed-api/commit/587f9fc))
+
+### ❤️ Contributors
+
+- Yannic ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.2.9
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.8...v0.2.9)
