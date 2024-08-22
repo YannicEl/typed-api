@@ -2,7 +2,7 @@ import type { Schema } from "zod";
 import type { NonEmptyObject, UrlParams } from "./type.js";
 
 export type FetchParams = {
-	path: string | URL;
+	path: URL;
 	requestInit: RequestInit;
 };
 
@@ -91,7 +91,10 @@ export function defineEndpoint<RequestBody, ResponeBody>({
 			| [body: RequestBody]
 			| []
 	) => {
-		path = new URL(path);
+		let fetchParams: FetchParams = {
+			path: new URL(path),
+			requestInit,
+		};
 
 		let body: RequestBody | undefined;
 		if (args.length >= 1 && requestSchema) body = args[0] as RequestBody;
@@ -106,16 +109,18 @@ export function defineEndpoint<RequestBody, ResponeBody>({
 		}
 
 		for (const [key, value] of Object.entries(params)) {
-			path.pathname = path.pathname.replace(`:${key}`, value as string);
-			if (path.searchParams.has(key)) {
-				path.searchParams.set(key, value as string);
+			fetchParams.path.pathname = fetchParams.path.pathname.replace(
+				`:${key}`,
+				value as string,
+			);
+
+			if (fetchParams.path.searchParams.has(key)) {
+				fetchParams.path.searchParams.set(key, value as string);
 			}
 		}
 
 		if (hooks?.beforeRequest) {
-			const fetchParams = await hooks.beforeRequest({ path, requestInit });
-			path = fetchParams.path;
-			requestInit = fetchParams.requestInit;
+			fetchParams = await hooks.beforeRequest(fetchParams);
 		}
 
 		const res = await fetch(path, requestInit);
