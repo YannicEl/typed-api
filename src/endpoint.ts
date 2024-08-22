@@ -10,8 +10,13 @@ export type BeforeRequestHook = (
 	params: FetchParams,
 ) => Promise<FetchParams> | FetchParams;
 
+export type AfterRequestHook = (
+	response: Response,
+) => Promise<Response> | Response;
+
 export type EndpointHooks = {
 	beforeRequest: BeforeRequestHook;
+	afterRequest: AfterRequestHook;
 };
 
 export type BaseParams = {
@@ -123,7 +128,11 @@ export function defineEndpoint<RequestBody, ResponeBody>({
 			fetchParams = await hooks.beforeRequest(fetchParams);
 		}
 
-		const res = await fetch(fetchParams.path, fetchParams.requestInit);
+		let res = await fetch(fetchParams.path, fetchParams.requestInit);
+
+		if (hooks?.afterRequest) {
+			res = await hooks.afterRequest(res);
+		}
 
 		if (!res.ok) {
 			const error = await res.json();
