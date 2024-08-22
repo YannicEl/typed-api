@@ -123,7 +123,7 @@ export function defineEndpoint<RequestBody, ResponeBody>({
 			fetchParams = await hooks.beforeRequest(fetchParams);
 		}
 
-		const res = await fetch(path, requestInit);
+		const res = await fetch(fetchParams.path, fetchParams.requestInit);
 
 		if (!res.ok) {
 			const error = await res.json();
