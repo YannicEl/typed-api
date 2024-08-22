@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.2.9
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.8...v0.2.9)
+
+### 🩹 Fixes
+
+- Path/search param not being updated ([1f57bb4](https://github.com/YannicEl/typed-api/commit/1f57bb4))
+
+### 🏡 Chore
+
+- Updated changelog ([2d7dfdc](https://github.com/YannicEl/typed-api/commit/2d7dfdc))
+- Added npm link to readme ([cb42e03](https://github.com/YannicEl/typed-api/commit/cb42e03))
+
+### ❤️ Contributors
+
+- Yannic ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.2.8
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.7...v0.2.8)
