@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.12
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.11...v0.2.12)
+
+### 🩹 Fixes
+
+- Updated engines field ([cd51f4b](https://github.com/YannicEl/typed-api/commit/cd51f4b))
+
+### ❤️ Contributors
+
+- Yannic ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.2.11
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.10...v0.2.11)
