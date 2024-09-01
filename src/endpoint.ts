@@ -1,4 +1,4 @@
-import type { Schema } from "zod";
+import type { Schema, ZodTypeAny } from "zod";
 import type { NonEmptyObject, UrlParams } from "./type.js";
 
 export type FetchParams = {
@@ -26,8 +26,8 @@ export type BaseParams = {
 };
 
 export type DefineEndpointParams<
-	RequestBodySchema extends Schema = Schema<unknown>,
-	ResponeBodySchema extends Schema = Schema<unknown>,
+	RequestBodySchema extends ZodTypeAny = ZodTypeAny,
+	ResponeBodySchema extends ZodTypeAny = ZodTypeAny,
 > = BaseParams & {
 	requestSchema?: RequestBodySchema;
 	responseSchema?: ResponeBodySchema;

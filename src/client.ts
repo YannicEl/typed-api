@@ -1,4 +1,4 @@
-import type { Schema, z } from "zod";
+import type { ZodTypeAny, z } from "zod";
 import type {
 	ApiEndpoint,
 	BaseParams,
@@ -11,8 +11,8 @@ import type { Optional } from "./type.js";
 export type EndpointParams = Optional<BaseParams, "path"> &
 	(
 		| {
-				requestSchema?: Schema;
-				responseSchema?: Schema;
+				requestSchema?: ZodTypeAny;
+				responseSchema?: ZodTypeAny;
 				endpoints?: never;
 		  }
 		| {
@@ -37,10 +37,10 @@ export type ApiClient<T extends EndpointGroup> = {
 	[Key in keyof T]: T[Key]["endpoints"] extends EndpointGroup
 		? ApiClient<T[Key]["endpoints"]>
 		: ApiEndpoint<
-				T[Key]["requestSchema"] extends Schema
+				T[Key]["requestSchema"] extends ZodTypeAny
 					? z.infer<T[Key]["requestSchema"]>
 					: undefined,
-				T[Key]["responseSchema"] extends Schema
+				T[Key]["responseSchema"] extends ZodTypeAny
 					? z.infer<T[Key]["responseSchema"]>
 					: undefined,
 				T[Key]["path"] extends string ? T[Key]["path"] : never
