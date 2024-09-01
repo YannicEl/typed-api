@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.13
+
+[compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.12...v0.2.13)
+
+### 🩹 Fixes
+
+- Updated types ([86d5497](https://github.com/YannicEl/typed-api/commit/86d5497))
+
+### ❤️ Contributors
+
+- Yannic ([@YannicEl](http://github.com/YannicEl))
+
 ## v0.2.12
 
 [compare changes](https://github.com/YannicEl/typed-api/compare/v0.2.11...v0.2.12)
